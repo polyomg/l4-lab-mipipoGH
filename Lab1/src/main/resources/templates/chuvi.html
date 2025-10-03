@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle Calculator</title>
+</head>
+<body>
+<h2>Tính diện tích và chu vi hình chữ nhật</h2>
+
+<form action="/rectangle/calc" method="post">
+    <label for="length">Chiều dài:</label>
+    <input type="number" id="length" name="length" step="0.01" required>
+    <br><br>
+
+    <label for="width">Chiều rộng:</label>
+    <input type="number" id="width" name="width" step="0.01" required>
+    <br><br>
+
+    <button type="submit">Tính toán</button>
+    <p th:text="${error}"></p>
+</form>
+<div th:if="${area != null}">
+    <p>Diện tích: <span th:text="${area}"></span></p>
+    <p>Chu vi: <span th:text="${perimeter}"></span></p>
+    <p>Dài: <span th:text="${length}"></span></p>
+    <p>Rộng: <span th:text="${width}"></span></p>
+</div>
+</body>
+</html>
