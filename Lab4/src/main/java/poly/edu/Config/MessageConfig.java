@@ -15,32 +15,25 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
 public class MessageConfig implements WebMvcConfigurer {
-
-    // Nạp file tài nguyên đa ngôn ngữ (i18n)
     @Bean("messageSource")
     public MessageSource getMessageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
-        // chỉ ra vị trí file i18n/layout.properties, layout_vi.properties
         ms.setBasenames("classpath:i18n/layout");
-        ms.setDefaultEncoding("UTF-8"); // xử lý Unicode tiếng Việt
+        ms.setDefaultEncoding("UTF-8");
         return ms;
     }
-
-    // Xác định locale mặc định và cách lưu locale (bằng cookie)
     @Bean("localeResolver")
     public LocaleResolver getLocaleResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-        localeResolver.setCookiePath("/"); // cookie áp dụng cho toàn site
-        localeResolver.setCookieMaxAge(Duration.ofDays(30)); // lưu ngôn ngữ 30 ngày
-        localeResolver.setDefaultLocale(new Locale("vi")); // mặc định tiếng Việt
+        localeResolver.setCookiePath("/");
+        localeResolver.setCookieMaxAge(Duration.ofDays(30));
+        localeResolver.setDefaultLocale(new Locale("vi"));
         return localeResolver;
     }
-
-    // Cho phép thay đổi ngôn ngữ qua param ?lang=vi hoặc ?lang=en
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang"); // param tên là lang
+        interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
     }
 }
