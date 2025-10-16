@@ -1,0 +1,31 @@
+<div class="card mt-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Product List</h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-light">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Create Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="item : ${items}">
+                <tr>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')} + ' ₫'"></td>
+                    <td th:text="${item.createDate}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-info text-white" th:href="@{|/product/edit/${item.id}|}">Edit</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
